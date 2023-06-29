@@ -22,7 +22,7 @@ body {
 
   height: 100vh;
   
-  display: block;
+  display: grid;
   justify-content: center;
   text-align: center;
 
@@ -37,6 +37,19 @@ body {
   font-size: 8.8rem;
 }
 
+.controls {
+  background-color: #42D3FF21;
+  opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  gap: 3.2rem;
+
+  width: clamp(10rem, 10rem + 30vw 22.8rem);
+  padding: 1.7rem 0 1.7rem 0;
+
+  border-radius: 9999px;
+}
 
 footer button {
   position: absolute;
@@ -45,3 +58,7 @@ footer button {
   margin: 0 2rem 2rem 0
 }
 
+button {
+  background-color: transparent;
+  border: none;
+}
