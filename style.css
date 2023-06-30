@@ -64,14 +64,24 @@ button {
   cursor: pointer;
 }
 
+.alert-prompt.open {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .alert-prompt {
   position: absolute;
   background-color: var(--bg-color-alert-prompt);
-  top: 0;
   left: 0;
   right: 0;
-  padding: 0.8rem;
-  
+  padding: 2rem 0 2.6rem;
+  margin-top: 7rem;
+
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-70px);
+  transition: transform .7s;
 }
 
 .alert-prompt p {
@@ -89,8 +99,13 @@ button {
   padding: .8rem;
   border-radius: 5px;
   margin-right: .2rem;
+  text-align: center;
 }
 
+input::placeholder {
+  text-align: center;
+  color: gray;
+}
  
 .alert-prompt button {
   background-color: var(--bg-color-alert-prompt);
@@ -101,4 +116,28 @@ button {
   border-radius: 5px;
   border: 1px solid white;
   margin-left: .2rem;
+}
+
+.open {
+  display: grid;
+}
+
+.alert-error {
+  display: block;
+  position: absolute;
+  background-color: rgb(242, 105, 105);
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 5rem;
+}
+
+.alert-error p {
+  font-size: 1.5rem;
+  color: white;
+  justify-content: center;
+}
+
+.alert-error p:first-child {
+  padding-top: .5rem;
 }
