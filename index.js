@@ -7,6 +7,7 @@ const minutesDisplay = document.querySelector(".minutes")
 const secondsDisplay = document.querySelector(".seconds")
 
 let intervalId;
+let userMinutes;
 
 buttonPlay.addEventListener('click', () => {
   intervalId = setInterval(updateTimer, 1000)
@@ -34,6 +35,11 @@ buttonStop.addEventListener('click', () => {
 
   minutesDisplay.textContent = "00"
   secondsDisplay.textContent = "00"
+})
+
+buttonSetting.addEventListener('click', () => {
+  userMinutes = prompt("Informe a quantidade de minutos para o Timer: ")
+  minutesDisplay.textContent = userMinutes
 })
 
 function updateTimer () {

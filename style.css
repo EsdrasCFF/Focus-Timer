@@ -7,7 +7,7 @@
 :root {
   font-size: 62.5%;
   --bg-color: #121214;
-  
+  --bg-color-alert-prompt: #42d3ff5e;
   --ff-primary: 'Roboto', sans-serif;
   --fc-white: #ffffff
 }
@@ -62,4 +62,27 @@ button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+.alert-prompt {
+  position: absolute;
+  background-color: var(--bg-color-alert-prompt);
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0.8rem;
+}
+
+.alert-prompt label {
+  color: var(--fc-white);
+  font-size: 2rem;
+}
+
+.alert-prompt input {
+  margin-top: 0.2rem;
+  border: 1px solid white;
+  font-size: 2rem;
+  width: 10rem;
+  padding: .3rem 0 0 0.3rem;
+  border-radius: 5px;
 }
