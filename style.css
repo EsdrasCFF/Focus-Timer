@@ -61,4 +61,5 @@ footer button {
 button {
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
