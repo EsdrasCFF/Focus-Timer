@@ -74,16 +74,31 @@ button {
   
 }
 
-.alert-prompt label {
+.alert-prompt p {
   color: var(--fc-white);
   font-size: 2rem;
 }
+
+
 
 .alert-prompt input {
   margin-top: 0.2rem;
   border: 1px solid white;
   font-size: 2rem;
-  width: 10rem;
-  padding: .3rem 0 0 0.3rem;
+  width: 7rem;
+  padding: .8rem;
   border-radius: 5px;
+  margin-right: .2rem;
+}
+
+ 
+.alert-prompt button {
+  background-color: var(--bg-color-alert-prompt);
+  padding: .8rem;
+  width: 7rem;
+  font-size: 2rem;
+  color: white;
+  border-radius: 5px;
+  border: 1px solid white;
+  margin-left: .2rem;
 }
