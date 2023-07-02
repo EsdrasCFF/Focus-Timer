@@ -12,8 +12,11 @@ const secondsDisplay = document.querySelector(".seconds")
 const alertPromptDisplay = document.querySelector(".alert-prompt")
 const alertErrorDisplay = document.getElementById("alert-error")
 
+
+
 let soundConcetration = new Audio("https://www.zapsplat.com/wp-content/uploads/2015/music-one/music_zapsplat_quiz_bed_concentration.mp3")
 let soundPlay = new Audio("https://cdn.freesound.org/previews/686/686557_14734264-lq.mp3")
+let soundStop = new Audio("https://cdn.freesound.org/previews/337/337168_3624044-lq.mp3")
 let inputMinutes;
 let intervalId;
 
@@ -56,6 +59,8 @@ buttonStop.addEventListener('click', () => {
 
   alertPromptDisplay.classList.remove("open")
   alertErrorDisplay.classList.add("hidden")
+
+  soundStop.play()
 })
 
 buttonSetting.addEventListener('click', () => {
@@ -119,6 +124,7 @@ function updateTimer () {
     buttonSetting.classList.remove("hidden")
     buttonPlay.classList.remove("hidden")
     
+    soundStop.play()
     return
   }
 
@@ -137,4 +143,7 @@ function isNumber(char) {
   return !isNaN(parseFloat(char)) && isFinite(char);
 }
 
-
+function twoDigits(num) {
+  let number = num.toString().padStart(2, "0")
+  return number
+}
