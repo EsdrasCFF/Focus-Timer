@@ -122,8 +122,7 @@ input::placeholder {
   display: grid;
 }
 
-.alert-error {
-  display: block;
+#alert-error {
   position: absolute;
   background-color: rgb(242, 105, 105);
   top: 0;
@@ -132,12 +131,8 @@ input::placeholder {
   height: 5rem;
 }
 
-.alert-error p {
-  font-size: 1.5rem;
+#alert-error p {
+  font-size: 1.6rem;
   color: white;
-  justify-content: center;
-}
-
-.alert-error p:first-child {
-  padding-top: .5rem;
+  margin-top: 1.5rem;
 }

@@ -4,14 +4,19 @@ const buttonSetting = document.querySelector(".buttonSetting")
 const buttonStop = document.querySelector(".buttonStop")
 const buttonSendMinutes = document.querySelector(".buttonSend")
 
+const buttonSoundOn = document.querySelector(".buttonSoundOn")
+const buttonSoundOff = document.querySelector(".buttonSoundOff")
+
 const minutesDisplay = document.querySelector(".minutes")
 const secondsDisplay = document.querySelector(".seconds")
 const alertPromptDisplay = document.querySelector(".alert-prompt")
-const alertErrorDisplay = document.querySelector(".alert-error")
+const alertErrorDisplay = document.getElementById("alert-error")
 
-
+let soundConcetration = new Audio("https://www.zapsplat.com/wp-content/uploads/2015/music-one/music_zapsplat_quiz_bed_concentration.mp3")
+let soundPlay = new Audio("https://cdn.freesound.org/previews/686/686557_14734264-lq.mp3")
 let inputMinutes;
 let intervalId;
+
 
 
 buttonPlay.addEventListener('click', () => {
@@ -21,6 +26,13 @@ buttonPlay.addEventListener('click', () => {
   buttonPlay.classList.add("hidden")
   buttonSetting.classList.add("hidden")
   buttonStop.classList.remove("hidden")
+
+  alertPromptDisplay.classList.remove("open")
+  alertErrorDisplay.classList.add("hidden")
+
+  soundPlay.play()
+
+
 })
 
 buttonPause.addEventListener('click', () => {
@@ -28,6 +40,7 @@ buttonPause.addEventListener('click', () => {
 
   buttonPause.classList.add("hidden")
   buttonPlay.classList.remove("hidden")
+
 })
 
 buttonStop.addEventListener('click', () => {
@@ -40,6 +53,9 @@ buttonStop.addEventListener('click', () => {
 
   minutesDisplay.textContent = "00"
   secondsDisplay.textContent = "00"
+
+  alertPromptDisplay.classList.remove("open")
+  alertErrorDisplay.classList.add("hidden")
 })
 
 buttonSetting.addEventListener('click', () => {
@@ -48,14 +64,48 @@ buttonSetting.addEventListener('click', () => {
 
 buttonSendMinutes.addEventListener('click', () => {
   inputMinutes = document.querySelector("#userMinutes").value
-  if(inputMinutes < 1) {
-    
+  let checkinInputValue = isNumber(inputMinutes)
+  let minutes = document.getElementById("minutes")
+  if (checkinInputValue == false) {
+    alertErrorDisplay.querySelector(".text-error").textContent = 'Enter numbers only.'
+    alertErrorDisplay.classList.remove("hidden")
+    document.getElementById("userMinutes").value = ""
+    return
+
+  } else if (inputMinutes < 1) {
+    alertErrorDisplay.classList.remove("hidden")
+    alertErrorDisplay.querySelector(".text-error").textContent = 'The value cannot be less than 0.'
+    document.getElementById("userMinutes").value = ""
+    return
+
+  } else if (inputMinutes > 999) {
+    alertErrorDisplay.classList.remove("hidden")
+    alertErrorDisplay.querySelector(".text-error").textContent = 'The value cannot be great than 999.'
+    document.getElementById("userMinutes").value = ""
+    return
+  } else {
+    alertErrorDisplay.classList.add("hidden")
+    alertPromptDisplay.classList.remove("open")
+    minutes.textContent = inputMinutes
   }
 
-  //minutesDisplay.textContent = inputMinutes
-
-  //alertPromptDisplay.classList.remove("open")
 })
+
+buttonSoundOn.addEventListener('click', () => {
+  soundConcetration.pause()
+  
+  buttonSoundOn.classList.add("hidden")
+  buttonSoundOff.classList.remove("hidden")
+
+})
+
+buttonSoundOff.addEventListener('click', () => {
+  soundConcetration.play()
+  
+  buttonSoundOn.classList.remove("hidden")
+  buttonSoundOff.classList.add("hidden")
+})
+
 
 function updateTimer () {
   let initialMinutes = minutesDisplay.textContent
@@ -82,7 +132,9 @@ function updateTimer () {
   }
 }
 
-function checkInputValue() {
-  let inputMinutes = document.querySelector('.userMinutes').value
-  console.log(inputMinutes)
+
+function isNumber(char) {
+  return !isNaN(parseFloat(char)) && isFinite(char);
 }
+
+
