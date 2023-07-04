@@ -1,4 +1,3 @@
-import { updateTimer } from "./timer"
 
 const buttonPlay = document.querySelector(".buttonPlay")
 const buttonPause = document.querySelector(".buttonPause")
@@ -11,6 +10,7 @@ const buttonSoundOff = document.querySelector(".buttonSoundOff")
 
 const minutesDisplay = document.querySelector(".minutes")
 const secondsDisplay = document.querySelector(".seconds")
+
 const alertPromptDisplay = document.querySelector(".alert-prompt")
 const alertErrorDisplay = document.getElementById("alert-error")
 
@@ -19,7 +19,8 @@ const alertErrorDisplay = document.getElementById("alert-error")
 let soundConcetration = new Audio("https://www.zapsplat.com/wp-content/uploads/2015/music-one/music_zapsplat_quiz_bed_concentration.mp3")
 let soundPlay = new Audio("https://cdn.freesound.org/previews/686/686557_14734264-lq.mp3")
 let soundStop = new Audio("https://cdn.freesound.org/previews/337/337168_3624044-lq.mp3")
-let inputMinutes;
+
+//let inputMinutes;
 let intervalId;
 
 
@@ -32,9 +33,7 @@ buttonPlay.addEventListener('click', () => {
   buttonSetting.classList.add("hidden")
   buttonStop.classList.remove("hidden")
 
-  alertPromptDisplay.classList.remove("open")
-  alertErrorDisplay.classList.add("hidden")
-
+  closePrompts()
   soundPlay.play()
 
 
@@ -59,9 +58,7 @@ buttonStop.addEventListener('click', () => {
   minutesDisplay.textContent = "00"
   secondsDisplay.textContent = "00"
 
-  alertPromptDisplay.classList.remove("open")
-  alertErrorDisplay.classList.add("hidden")
-
+  closePrompts()
   soundStop.play()
 })
 
@@ -70,7 +67,7 @@ buttonSetting.addEventListener('click', () => {
 })
 
 buttonSendMinutes.addEventListener('click', () => {
-  inputMinutes = document.querySelector("#userMinutes").value
+  let inputMinutes = document.querySelector("#userMinutes").value
   let checkinInputValue = isNumber(inputMinutes)
   let minutes = document.getElementById("minutes")
   if (checkinInputValue == false) {
@@ -91,8 +88,7 @@ buttonSendMinutes.addEventListener('click', () => {
     document.getElementById("userMinutes").value = ""
     return
   } else {
-    alertErrorDisplay.classList.add("hidden")
-    alertPromptDisplay.classList.remove("open")
+    closePrompts()
     minutes.textContent = twoDigits(inputMinutes)
   }
 
@@ -113,6 +109,31 @@ buttonSoundOff.addEventListener('click', () => {
   buttonSoundOff.classList.add("hidden")
 })
 
+function updateTimer () {
+  let initialMinutes = minutesDisplay.textContent
+  let initialSeconds = secondsDisplay.textContent
+
+  if(initialMinutes < 1 && initialSeconds < 1) {
+    clearInterval(intervalId)
+
+    buttonStop.classList.add("hidden")
+    buttonPause.classList.add("hidden")
+    buttonSetting.classList.remove("hidden")
+    buttonPlay.classList.remove("hidden")
+    
+    soundStop.play()
+    return
+  }
+
+  if(initialSeconds > 0) {
+    initialSeconds --
+    secondsDisplay.textContent = twoDigits(initialSeconds)
+  } else {
+    secondsDisplay.textContent = 10
+    initialMinutes --
+    minutesDisplay.textContent = twoDigits(initialMinutes)
+  }
+}
 
 
 
@@ -123,4 +144,9 @@ function isNumber(char) {
 function twoDigits(num) {
   let number = num.toString().padStart(2, "0")
   return number
+}
+
+function closePrompts () {
+  alertPromptDisplay.classList.remove("open")
+  alertErrorDisplay.classList.add("hidden")
 }
